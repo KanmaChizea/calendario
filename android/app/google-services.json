@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1031248022342",
+    "project_id": "kanma-fyp",
+    "storage_bucket": "kanma-fyp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1031248022342:android:9e0b1eff45a6da63cb3347",
+        "android_client_info": {
+          "package_name": "com.kanma.project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1031248022342-cojfhsr4bcgmo2svi5pct1b5f8lfgs7o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7yG8xhczlrLLFjHyr3u9z3B2UF54RjDs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1031248022342-cojfhsr4bcgmo2svi5pct1b5f8lfgs7o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
