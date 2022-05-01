@@ -47,8 +47,8 @@ ThemeData darkTheme = ThemeData(
       backgroundColor: Colors.white,
       foregroundColor: Colors.purple,
       splashColor: Colors.black),
-  iconTheme: const IconThemeData(color: Colors.purple),
-  primarySwatch: Colors.purple,
+  iconTheme: const IconThemeData(color: Colors.white),
+  primarySwatch: Colors.grey,
   checkboxTheme: CheckboxThemeData(
       checkColor: MaterialStateProperty.all<Color>(Colors.black),
       fillColor: MaterialStateProperty.all<Color>(Colors.white)),

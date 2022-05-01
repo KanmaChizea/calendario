@@ -29,7 +29,7 @@ class OpenCourse extends StatelessWidget {
 
   buildForm(String s, String t, IconData u, BuildContext context) {
     return ListTile(
-      leading: Icon(u, color: Colors.purple.withOpacity(0.4)),
+      leading: Icon(u),
       title: Text(s,
           style:
               Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: 14)),

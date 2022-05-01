@@ -34,14 +34,9 @@ class _HomepageState extends State<Homepage> {
               initialData: null,
             ),
             StreamProvider<UserInformation>.value(
-              value: EventDatabase().userDataStream,
-              initialData: UserInformation(
-                  assignment: '',
-                  test: '',
-                  tutorial: '',
-                  role: '',
-                  courses: []),
-            ),
+                value: EventDatabase().userDataStream,
+                initialData: UserInformation(
+                    assignment: '0', test: '0', tutorial: '0', role: '')),
             StreamProvider<List<MyEvent>>.value(
               value: EventDatabase().courseStream,
               initialData: const [],

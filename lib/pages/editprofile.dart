@@ -57,9 +57,7 @@ class _EditprofileState extends State<Editprofile> {
         : Scaffold(
             appBar: AppBar(
               actions: [
-                ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.transparent, elevation: 0),
+                TextButton.icon(
                   onPressed: () async {
                     setState(() {
                       loading = true;
@@ -122,9 +120,6 @@ class _EditprofileState extends State<Editprofile> {
                                           imageUrl: user.photoURL ?? '')),
                                   verticalSpace(15),
                                   ElevatedButton.icon(
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Theme.of(context).primaryColor,
-                                    ),
                                     icon: const Icon(Icons.add_a_photo),
                                     label: const Text('Change profile picture'),
                                     onPressed: () {
