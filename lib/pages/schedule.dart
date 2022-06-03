@@ -38,7 +38,7 @@ class _ScheduleState extends State<Schedule> {
           user!.role == 'admin' ? _floatingActionButton() : null,
       drawer: const CustomDrawer(),
       body: RefreshIndicator(
-          color: Colors.purpleAccent,
+          color: Theme.of(context).primaryColor,
           onRefresh: () async {
             setState(() {});
           },

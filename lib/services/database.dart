@@ -116,7 +116,7 @@ class EventDatabase {
             }));
   }
 
-  Stream<UserInformation> get userDataStream => FirebaseFirestore.instance
+  Stream<UserInformation> userDataStream() => FirebaseFirestore.instance
       .collection('users')
       .doc(currentUser?.uid)
       .snapshots()

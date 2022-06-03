@@ -38,7 +38,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       child: ClipOval(
                         child: CachedNetworkImage(
                             placeholder: (context, url) => const Text('avatar'),
-                            imageUrl: user!.photoURL ?? '',
+                            imageUrl: user?.photoURL ?? '',
                             fit: BoxFit.contain),
                       ),
                     ),
@@ -47,7 +47,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          user.displayName ?? '',
+                          user?.displayName ?? '',
                           style: const TextStyle(fontSize: 18),
                         ),
                         ElevatedButton(
@@ -69,27 +69,27 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                     borderRadius: BorderRadius.circular(12)),
                                 side: BorderSide(
                                     width: 1.0,
-                                    color: Colors.purple.withOpacity(0.5))))
+                                    color: Theme.of(context)
+                                        .primaryColor
+                                        .withOpacity(0.5))))
                       ],
                     ),
                   ],
                 ),
               );
             })),
-        Divider(thickness: 1.0, color: Colors.purple[50]),
+        const Divider(thickness: 1.0),
         drawerElement(context, Icons.calendar_today_outlined, 'Schedule',
             AppRoutes.schedule),
         drawerElement(
             context, Icons.calendar_view_month, 'Month', AppRoutes.month),
-        Divider(
+        const Divider(
           thickness: 1.0,
-          color: Colors.purple[50],
         ),
         drawerElement(context, Icons.settings, 'Settings', AppRoutes.setting),
         drawerElement(context, Icons.power_settings_new, 'Log Out', ''),
-        Divider(
+        const Divider(
           thickness: 1.0,
-          color: Colors.purple[50],
         ),
       ],
     ));
@@ -106,7 +106,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
         ),
         onTap: link.isEmpty
             ? () async {
-                await _auth.signout();
+                await _auth.signout(context);
               }
             : () {
                 Navigator.pushNamed(context, link);

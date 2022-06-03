@@ -1,27 +1,28 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:project/model/user.dart';
+import 'package:project/routes/routes.dart';
 import 'package:project/services/database.dart';
+import 'package:flutter/material.dart';
+
+import '../main.dart';
 
 User? user = FirebaseAuth.instance.currentUser;
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  MyUser? _firebaseUser(User? user) {
-    return user != null ? MyUser(uid: user.uid) : null;
-  }
-
   Stream<User?> get user {
     return _auth.authStateChanges();
   }
 
   //sign in
-  Future signIn(String email, String password) async {
+  Future signIn(String email, String password, BuildContext context) async {
     try {
-      UserCredential result = await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
-      User? user = result.user;
-      return _firebaseUser(user);
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (_) => const Homepage()),
+          (route) => false);
+      return;
     } on FirebaseAuthException catch (e) {
       return e.toString().replaceAll(RegExp('\\[.*?\\]'), '');
     } catch (e) {
@@ -30,7 +31,8 @@ class AuthService {
   }
 
   //register
-  Future register(String email, String password, String username) async {
+  Future register(String email, String password, String username,
+      BuildContext context) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -45,8 +47,11 @@ class AuthService {
           assignmentColor: '0xff0000ff',
           tutorialColor: '0xff00ff00',
           role: 'student');
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (_) => const Homepage()),
+          (route) => false);
 
-      return _firebaseUser(user);
+      return;
     } on FirebaseAuthException catch (e) {
       return e.toString().replaceAll(RegExp('\\[.*?\\]'), '');
     } catch (e) {
@@ -55,9 +60,11 @@ class AuthService {
   }
 
   //sign out
-  Future signout() async {
+  Future signout(BuildContext context) async {
     try {
       await _auth.signOut();
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(AppRoutes.login, (route) => false);
     } catch (e) {
       return null;
     }

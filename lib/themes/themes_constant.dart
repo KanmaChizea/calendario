@@ -2,19 +2,21 @@ import 'package:flutter/material.dart';
 
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
-  primarySwatch: Colors.purple,
+  primarySwatch: Colors.indigo,
+  primaryColor: const Color(0xff153258),
   appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.purple, foregroundColor: Colors.white),
+      backgroundColor: Color(0xff153258), foregroundColor: Colors.white),
   cardColor: Colors.white,
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: Colors.purpleAccent, foregroundColor: Colors.white),
-  iconTheme: const IconThemeData(color: Colors.purple),
+      backgroundColor: Color(0xff283541), foregroundColor: Colors.white),
+  iconTheme: const IconThemeData(color: Colors.black),
   checkboxTheme: CheckboxThemeData(
       checkColor: MaterialStateProperty.all<Color>(Colors.white),
-      fillColor: MaterialStateProperty.all<Color>(Colors.purpleAccent)),
+      fillColor: MaterialStateProperty.all<Color>(const Color(0xff153258))),
   elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.purple),
+          backgroundColor:
+              MaterialStateProperty.all<Color>(const Color(0xff153258)),
           foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
           overlayColor: MaterialStateProperty.all<Color>(Colors.black),
           shape: MaterialStateProperty.all<OutlinedBorder>(
@@ -22,20 +24,21 @@ ThemeData lightTheme = ThemeData(
                   borderRadius: BorderRadius.circular(12))))),
   textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-    primary: Colors.purpleAccent,
+    primary: const Color(0xff283541),
   )),
-  dividerColor: Colors.purple,
+  dividerColor: const Color(0xFFC9D8E6),
   radioTheme: RadioThemeData(
-      fillColor: MaterialStateProperty.all<Color>(Colors.purpleAccent)),
+      fillColor: MaterialStateProperty.all<Color>(const Color(0xff153258))),
   textTheme: const TextTheme(
     titleSmall: TextStyle(
-        fontSize: 11, fontWeight: FontWeight.bold, color: Colors.purpleAccent),
+        fontSize: 11, fontWeight: FontWeight.bold, color: Color(0xff283541)),
   ),
 );
 
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   scaffoldBackgroundColor: Colors.black26,
+  primaryColor: Colors.white,
   textTheme: const TextTheme(
     titleSmall: TextStyle(
         fontSize: 11, fontWeight: FontWeight.bold, color: Colors.grey),
@@ -43,9 +46,9 @@ ThemeData darkTheme = ThemeData(
   appBarTheme: const AppBarTheme(
       backgroundColor: Colors.black12, foregroundColor: Colors.white),
   cardColor: Colors.black45,
-  floatingActionButtonTheme: const FloatingActionButtonThemeData(
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: Colors.white,
-      foregroundColor: Colors.purple,
+      foregroundColor: Colors.grey.shade900,
       splashColor: Colors.black),
   iconTheme: const IconThemeData(color: Colors.white),
   primarySwatch: Colors.grey,

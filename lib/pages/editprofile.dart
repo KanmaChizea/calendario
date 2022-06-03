@@ -91,19 +91,21 @@ class _EditprofileState extends State<Editprofile> {
                 child: StreamBuilder<User?>(
                     stream: _auth.user,
                     builder: (context, snapshot) {
-                      final user = snapshot.data as User;
+                      final user = snapshot.data;
                       return Column(
                         children: [
                           TextFormField(
-                            initialValue: user.displayName,
+                            initialValue: user?.displayName,
                             onChanged: (value) => username = value,
                             maxLines: 1,
                             decoration: InputDecoration(
                               hintText: name,
-                              focusedBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.purple)),
-                              enabledBorder: const UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.purple),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context).primaryColor)),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).primaryColor),
                               ),
                             ),
                           ),
@@ -117,7 +119,7 @@ class _EditprofileState extends State<Editprofile> {
                                       width: 300,
                                       decoration: const BoxDecoration(),
                                       child: CachedNetworkImage(
-                                          imageUrl: user.photoURL ?? '')),
+                                          imageUrl: user?.photoURL ?? '')),
                                   verticalSpace(15),
                                   ElevatedButton.icon(
                                     icon: const Icon(Icons.add_a_photo),

@@ -79,10 +79,10 @@ class Courses extends StatelessWidget {
                                 return null;
                               }
                             },
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                color: Colors.purple,
+                                color: Theme.of(context).primaryColor,
                                 width: 1.0,
                               )),
                               hintText: 'Enter Course Code',

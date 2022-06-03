@@ -52,37 +52,36 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
             animation: animationController,
             builder: (context, child) {
               return Scaffold(
-                  backgroundColor: Colors.white,
                   body: Transform(
-                    transform: Matrix4.translationValues(
-                        animation.value * width, 0, 0),
-                    child: SingleChildScrollView(
-                      keyboardDismissBehavior:
-                          ScrollViewKeyboardDismissBehavior.onDrag,
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            isSignupScreen
-                                ? SizedBox(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.2,
-                                  )
-                                : SizedBox(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.3,
-                                  ),
-                            isSignupScreen
-                                ? headerText('Signup')
-                                : headerText('Login'),
-                            verticalSpace(20),
-                            isSignupScreen ? signupForm() : loginForm()
-                          ],
-                        ),
-                      ),
+                transform:
+                    Matrix4.translationValues(animation.value * width, 0, 0),
+                child: SingleChildScrollView(
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        isSignupScreen
+                            ? SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.2,
+                              )
+                            : SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.3,
+                              ),
+                        isSignupScreen
+                            ? headerText('Signup')
+                            : headerText('Login'),
+                        verticalSpace(20),
+                        isSignupScreen ? signupForm() : loginForm()
+                      ],
                     ),
-                  ));
+                  ),
+                ),
+              ));
             });
   }
 
@@ -129,8 +128,8 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                   loading = true;
                 });
                 final data = _formKey.currentState!.value;
-                dynamic result =
-                    await _auth.signIn(data['email'], data['password']);
+                dynamic result = await _auth.signIn(
+                    data['email'], data['password'], context);
                 if (result is String) {
                   setState(() {
                     error = result;
@@ -146,11 +145,6 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            style: ElevatedButton.styleFrom(
-                primary: Colors.purple,
-                minimumSize: const Size(500, 40),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20))),
           ),
           verticalSpace(10),
           TextButton(
@@ -163,7 +157,6 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                 ),
               )),
           TextButton(
-              style: textButtonStyle(),
               onPressed: () {
                 setState(() {
                   error = '';
@@ -172,11 +165,6 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
               },
               child: const Text(
                 "Don't have an account? Register",
-                style: TextStyle(
-                    color: Color(0xFF711881),
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 1.2),
               )),
           verticalSpace(10),
         ],
@@ -243,32 +231,28 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                           )),
                     ),
               ElevatedButton(
-                  onPressed: () async {
-                    _formKey.currentState!.save();
-                    if (_formKey.currentState!.validate()) {
+                onPressed: () async {
+                  _formKey.currentState!.save();
+                  if (_formKey.currentState!.validate()) {
+                    setState(() {
+                      loading = true;
+                    });
+                    final data = _formKey.currentState!.value;
+                    dynamic result = await _auth.register(data['email'],
+                        data['password'], data['username'], context);
+                    if (result is String) {
                       setState(() {
-                        loading = true;
+                        error = result;
+                        loading = false;
                       });
-                      final data = _formKey.currentState!.value;
-                      dynamic result = await _auth.register(
-                          data['email'], data['password'], data['username']);
-                      if (result is String) {
-                        setState(() {
-                          error = result;
-                          loading = false;
-                        });
-                      }
                     }
-                  },
-                  child: const Text(
-                    'CREATE ACCOUNT',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.purple,
-                      minimumSize: const Size(500, 40),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)))),
+                  }
+                },
+                child: const Text(
+                  'CREATE ACCOUNT',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+              ),
               verticalSpace(10),
               TextButton(
                 onPressed: () {
@@ -277,14 +261,8 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                     isSignupScreen = !isSignupScreen;
                   });
                 },
-                style: textButtonStyle(),
                 child: const Text(
                   'Already have an account? Sign in',
-                  style: TextStyle(
-                      color: Color(0xFF711881),
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: 1.2),
                 ),
               ),
             ]));
@@ -296,36 +274,38 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
         text: TextSpan(
             text: title,
             style: const TextStyle(
-                fontSize: 78, fontWeight: FontWeight.bold, color: Colors.black),
-            children: const [
+              fontSize: 78,
+              fontWeight: FontWeight.bold,
+            ),
+            children: [
           TextSpan(
               text: '.',
               style: TextStyle(
                   fontSize: 78,
                   fontWeight: FontWeight.bold,
-                  color: Colors.purple))
+                  color: Theme.of(context).primaryColor))
         ]));
   }
 
 // text field decoration
   buildDecoration(IconData icon, String hintText) {
     return InputDecoration(
-        prefixIcon: Icon(
-          icon,
-        ),
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-              color: Theme.of(context).primaryColor,
-              width: 1.0,
-              style: BorderStyle.solid),
-        ),
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.deepPurple, width: 2.0),
-        ),
-        contentPadding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
-        hintText: hintText,
-        hintStyle: const TextStyle(
-            color: Colors.purple, fontSize: 16.0, fontWeight: FontWeight.w600));
+      prefixIcon: Icon(
+        icon,
+      ),
+      enabledBorder: UnderlineInputBorder(
+        borderSide: BorderSide(
+            color: Theme.of(context).primaryColor,
+            width: 1.0,
+            style: BorderStyle.solid),
+      ),
+      focusedBorder: UnderlineInputBorder(
+        borderSide:
+            BorderSide(color: Theme.of(context).primaryColor, width: 2.0),
+      ),
+      contentPadding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+      hintText: hintText,
+    );
   }
 
 // style for text button
