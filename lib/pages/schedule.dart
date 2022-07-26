@@ -6,6 +6,8 @@ import 'package:project/services/database.dart';
 import 'package:project/components/drawer.dart';
 import 'package:provider/provider.dart';
 
+import '../model/event_model.dart';
+
 class Schedule extends StatefulWidget {
   const Schedule({Key? key}) : super(key: key);
 
@@ -40,7 +42,10 @@ class _ScheduleState extends State<Schedule> {
       body: RefreshIndicator(
           color: Theme.of(context).primaryColor,
           onRefresh: () async {
-            setState(() {});
+            StreamProvider<List<MyEvent>>.value(
+              value: EventDatabase().courseStream,
+              initialData: const [],
+            );
           },
           child: const DisplaySchedule()),
     );

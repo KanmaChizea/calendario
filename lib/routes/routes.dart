@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project/pages/addevent.dart';
 import 'package:project/pages/appearance.dart';
 import 'package:project/pages/editcourses.dart';
-import 'package:project/pages/login.dart';
+import 'package:project/pages/authscreen.dart';
 import 'package:project/pages/month.dart';
 import 'package:project/pages/notifications.dart';
 import 'package:project/pages/priorities.dart';
@@ -34,7 +34,7 @@ class AppRoutes {
             case setting:
               return const Setting();
             case login:
-              return const Login();
+              return const AuthScreen();
             case addevent:
               return const AddEvent();
             case appearance:

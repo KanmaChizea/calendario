@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:project/components/drawer.dart';
 
 class LoadingPage extends StatelessWidget {
@@ -17,9 +16,8 @@ class LoadingPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SpinKitCircle(
-            color: Theme.of(context).backgroundColor,
-            size: 50.0,
+          CircularProgressIndicator(
+            color: Theme.of(context).primaryColor,
           ),
           verticalSpace(20),
           isLogin

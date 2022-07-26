@@ -18,7 +18,6 @@ class _AddEventState extends State<AddEvent> {
   final items = ['Assignment', 'Test', 'Tutorial'];
 
   String? value;
-  String description = 'null';
   String type = 'Type';
   late EventDatabase _eventdb;
   late TextEditingController courseController;
@@ -244,6 +243,9 @@ class _AddEventState extends State<AddEvent> {
   Future saveForm() async {
     if (_formkey.currentState!.validate()) {
       final course = courseController.text.toUpperCase();
+      final description = descriptionController.text.isEmpty
+          ? 'null'
+          : descriptionController.text;
       _eventdb.updateEventData(course, byDate, description, type);
       Navigator.of(context).pop();
     }
