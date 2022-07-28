@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../services/auth.dart';
-import '../services/utils.dart';
-import '../state management/auth_state_management.dart';
-import '../styles/buttons.dart';
+import '../../services/auth.dart';
+import '../../services/utils.dart';
+import '../../state management/auth_state_management.dart';
+import '../../styles/buttons.dart';
 import 'inputfield_decor.dart';
 
 class LoginForm extends StatefulWidget {

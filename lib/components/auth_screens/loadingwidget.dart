@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/components/drawer.dart';
+import 'package:project/components/home%20widgets/drawer.dart';
 
 class LoadingPage extends StatelessWidget {
   final bool isLogin;
@@ -22,7 +22,8 @@ class LoadingPage extends StatelessWidget {
           verticalSpace(20),
           isLogin
               ? Container()
-              : const Text('Please wait...', style: TextStyle(fontSize: 14))
+              : const Center(
+                  child: Text('Please wait...', style: TextStyle(fontSize: 14)))
         ],
       ),
     );

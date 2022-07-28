@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:project/model/event_model.dart';
 import 'package:project/services/utils.dart';
 
+import '../components/home widgets/event_view_form.dart';
+
 class OpenCourse extends StatelessWidget {
   final MyEvent x;
   const OpenCourse({
@@ -18,23 +20,24 @@ class OpenCourse extends StatelessWidget {
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const CloseButton(),
           verticalSpace(10),
-          buildForm('COURSE:', x.course, CupertinoIcons.book_circle, context),
-          buildForm('BY:', x.by, CupertinoIcons.calendar_circle, context),
-          buildForm('TYPE:', x.type, Icons.assessment_outlined, context),
-          buildForm('DESCRIPTION:', x.description, Icons.note_outlined, context)
+          EventViewForm(
+              title: 'COURSE:',
+              subtitle: x.course,
+              icon: CupertinoIcons.book_circle),
+          EventViewForm(
+              title: 'BY:',
+              subtitle: x.by,
+              icon: CupertinoIcons.calendar_circle),
+          EventViewForm(
+              title: 'TYPE:',
+              subtitle: x.type,
+              icon: Icons.assessment_outlined),
+          EventViewForm(
+              title: 'DESCRIPTION:',
+              subtitle: x.description,
+              icon: Icons.note_outlined)
         ]),
       ),
-    );
-  }
-
-  buildForm(String s, String t, IconData u, BuildContext context) {
-    return ListTile(
-      leading: Icon(u),
-      title: Text(s,
-          style:
-              Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: 14)),
-      subtitle: Text(t,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
     );
   }
 }

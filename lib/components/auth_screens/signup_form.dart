@@ -3,7 +3,7 @@ import 'package:project/services/auth.dart';
 import 'package:project/state%20management/auth_state_management.dart';
 import 'package:provider/provider.dart';
 
-import '../services/utils.dart';
+import '../../services/utils.dart';
 import 'inputfield_decor.dart';
 
 class SignUpForm extends StatefulWidget {

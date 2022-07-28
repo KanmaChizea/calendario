@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:project/routes/routes.dart';
+
+import '../components/settings_widgets/settings_element.dart';
 
 class Setting extends StatelessWidget {
   const Setting({Key? key}) : super(key: key);
@@ -10,35 +13,28 @@ class Setting extends StatelessWidget {
         appBar: AppBar(title: const Text('Settings')),
         body: Container(
           margin: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 15.0),
-          child: ListView(padding: EdgeInsets.zero, children: [
-            settingsElements(context, 'Appearance', AppRoutes.appearance),
-            const Divider(
+          child: ListView(padding: EdgeInsets.zero, children: const [
+            SettingsElement(
+                title: 'Appearance', appRoutes: AppRoutes.appearance),
+            Divider(
               height: 5.0,
             ),
-            settingsElements(
-                context, 'Edit Course List', AppRoutes.editCourses),
-            const Divider(
+            SettingsElement(
+                title: 'Edit Course List', appRoutes: AppRoutes.editCourses),
+            Divider(
               height: 5.0,
             ),
-            settingsElements(context, 'Set Priorities', AppRoutes.priorities),
-            const Divider(
+            SettingsElement(
+                title: 'Set Priorities', appRoutes: AppRoutes.priorities),
+            Divider(
               height: 5.0,
             ),
-            settingsElements(context, 'Notifications', AppRoutes.notifications),
-            const Divider(
+            SettingsElement(
+                title: 'Notifications', appRoutes: AppRoutes.notifications),
+            Divider(
               height: 5.0,
             ),
           ]),
         ));
-  }
-
-  ListTile settingsElements(
-      BuildContext context, String title, String appRoutes) {
-    return ListTile(
-      title: Text(title),
-      onTap: () {
-        Navigator.pushNamed(context, appRoutes);
-      },
-    );
   }
 }

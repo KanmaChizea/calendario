@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:project/model/userinfo.dart';
-import 'package:project/components/display.dart';
+import 'package:project/components/home%20widgets/display.dart';
 import 'package:project/routes/routes.dart';
 import 'package:project/services/database.dart';
-import 'package:project/components/drawer.dart';
+import 'package:project/components/home%20widgets/drawer.dart';
 import 'package:provider/provider.dart';
 
 import '../model/event_model.dart';
@@ -15,11 +15,8 @@ class Schedule extends StatefulWidget {
   _ScheduleState createState() => _ScheduleState();
 }
 
-IconData theme = Icons.bedtime;
-
 class _ScheduleState extends State<Schedule> {
   late EventDatabase _eventDB;
-  String profilepic = '';
 
   @override
   void initState() {

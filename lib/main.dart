@@ -8,6 +8,7 @@ import 'package:project/routes/routes.dart';
 import 'package:project/services/wrapper.dart';
 import 'package:project/services/auth.dart';
 import 'package:project/services/database.dart';
+import 'package:project/state%20management/notification_provider.dart';
 import 'package:project/themes/theme_controller.dart';
 import 'package:project/themes/themes_constant.dart';
 import 'package:provider/provider.dart';
@@ -43,6 +44,8 @@ class _HomepageState extends State<Homepage> {
             ),
             ChangeNotifierProvider<ThemeNotifier>(
                 create: (context) => ThemeNotifier()),
+            ChangeNotifierProvider<NotificationProvider>(
+                create: (context) => NotificationProvider())
           ],
           builder: (context, child) => MaterialApp(
               debugShowCheckedModeBanner: false,

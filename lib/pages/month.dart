@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/components/drawer.dart';
+import 'package:project/components/home%20widgets/drawer.dart';
 import 'package:project/model/event_model.dart';
 import 'package:project/model/userinfo.dart';
 import 'package:project/pages/event_view.dart';

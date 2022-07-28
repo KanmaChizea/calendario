@@ -1,12 +1,14 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:project/services/auth.dart';
 import 'package:project/services/database.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:project/components/loadingwidget.dart';
+import 'package:project/components/auth_screens/loadingwidget.dart';
 import 'package:project/services/utils.dart';
 
 class Editprofile extends StatefulWidget {
@@ -17,7 +19,7 @@ class Editprofile extends StatefulWidget {
 }
 
 class _EditprofileState extends State<Editprofile> {
-  late AuthService _auth;
+  late TextEditingController controller;
   late DatabaseService _dbService;
   late File? image;
   final imagePicker = ImagePicker();
@@ -42,7 +44,6 @@ class _EditprofileState extends State<Editprofile> {
 
   @override
   void initState() {
-    _auth = AuthService();
     _dbService = DatabaseService();
     super.initState();
   }
@@ -79,6 +80,8 @@ class _EditprofileState extends State<Editprofile> {
                   },
                   icon: const Icon(Icons.done),
                   label: const Text('SAVE'),
+                  style: Theme.of(context).textButtonTheme.style?.copyWith(
+                      foregroundColor: MaterialStateProperty.all(Colors.white)),
                 )
               ],
               leading: CloseButton(onPressed: () {
@@ -88,51 +91,47 @@ class _EditprofileState extends State<Editprofile> {
             body: SingleChildScrollView(
               child: Container(
                 margin: const EdgeInsets.fromLTRB(15, 30, 0, 0),
-                child: StreamBuilder<User?>(
-                    stream: _auth.user,
-                    builder: (context, snapshot) {
-                      final user = snapshot.data;
-                      return Column(
-                        children: [
-                          TextFormField(
-                            initialValue: user?.displayName,
-                            onChanged: (value) => username = value,
-                            maxLines: 1,
-                            decoration: InputDecoration(
-                              hintText: name,
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Theme.of(context).primaryColor)),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Theme.of(context).primaryColor),
-                              ),
-                            ),
+                child: Consumer<User?>(builder: (context, value, child) {
+                  return Column(
+                    children: [
+                      TextFormField(
+                        initialValue: value?.displayName,
+                        onChanged: (value) => username = value,
+                        maxLines: 1,
+                        decoration: InputDecoration(
+                          hintText: name,
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColor)),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor),
                           ),
-                          Center(
-                            heightFactor: 1.3,
-                            child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Container(
-                                      height: 300,
-                                      width: 300,
-                                      decoration: const BoxDecoration(),
-                                      child: CachedNetworkImage(
-                                          imageUrl: user?.photoURL ?? '')),
-                                  verticalSpace(15),
-                                  ElevatedButton.icon(
-                                    icon: const Icon(Icons.add_a_photo),
-                                    label: const Text('Change profile picture'),
-                                    onPressed: () {
-                                      imagePickerMethod();
-                                    },
-                                  ),
-                                ]),
+                        ),
+                      ),
+                      Center(
+                        heightFactor: 1.3,
+                        child:
+                            Column(mainAxisSize: MainAxisSize.min, children: [
+                          Container(
+                              height: 300,
+                              width: 300,
+                              decoration: const BoxDecoration(),
+                              child: CachedNetworkImage(
+                                  imageUrl: user?.photoURL ?? '')),
+                          verticalSpace(15),
+                          ElevatedButton.icon(
+                            icon: const Icon(Icons.add_a_photo),
+                            label: const Text('Change profile picture'),
+                            onPressed: () {
+                              imagePickerMethod();
+                            },
                           ),
-                        ],
-                      );
-                    }),
+                        ]),
+                      ),
+                    ],
+                  );
+                }),
               ),
             ),
           );

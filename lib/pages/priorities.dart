@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/components/drawer.dart';
+import 'package:project/components/home%20widgets/drawer.dart';
 
 class Prioritee extends StatefulWidget {
   const Prioritee({Key? key}) : super(key: key);
@@ -54,20 +54,16 @@ class _PrioriteeState extends State<Prioritee> {
                 title: const Text('Tutorial'),
               ),
               verticalSpace(10),
-              buildButton()
+              Center(
+                child: ElevatedButton(
+                  child: const Text('SAVE'),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              )
             ],
           ),
         ));
-  }
-
-  buildButton() {
-    return Center(
-      child: ElevatedButton(
-        child: const Text('SAVE'),
-        onPressed: () {
-          Navigator.pop(context);
-        },
-      ),
-    );
   }
 }

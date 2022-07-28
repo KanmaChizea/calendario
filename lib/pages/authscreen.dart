@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:project/components/loadingwidget.dart';
-import 'package:project/components/signup_form.dart';
+import 'package:project/components/auth_screens/loadingwidget.dart';
+import 'package:project/components/auth_screens/signup_form.dart';
 import 'package:project/services/utils.dart';
 import 'package:project/state%20management/auth_state_management.dart';
 import 'package:project/styles/text.dart';
 import 'package:provider/provider.dart';
 
-import '../components/login_form.dart';
+import '../components/auth_screens/login_form.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({Key? key}) : super(key: key);
